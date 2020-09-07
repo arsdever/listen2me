@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace application
+namespace listen2me
 {
     public class ClickEventArgs
     {

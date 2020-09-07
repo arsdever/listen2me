@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace application
+namespace listen2me
 {
     public enum GWL
     {

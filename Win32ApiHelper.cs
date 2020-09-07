@@ -6,7 +6,7 @@ using System.Security;
 using System.Security.Permissions;
 using System.Text;
 
-namespace application
+namespace listen2me
 {
     class Win32ApiHelper
     {
@@ -16,6 +16,15 @@ namespace application
         private const int APPCOMMAND_VOLUME_UP = 0xA0000;
         private const int APPCOMMAND_VOLUME_DOWN = 0x90000;
         private const int WM_APPCOMMAND = 0x319;
+
+        [StructLayout(LayoutKind.Sequential, Pack = 1)]
+        public struct BLENDFUNCTION
+        {
+            public byte BlendOp;
+            public byte BlendFlags;
+            public byte SourceConstantAlpha;
+            public byte AlphaFormat;
+        }
 
         [SuppressUnmanagedCodeSecurity, SecurityCritical]
         internal static class SafeNativeMethods
@@ -60,6 +69,32 @@ namespace application
 
             [DllImport("user32.dll")]
             public static extern IntPtr SendMessageW(IntPtr hWnd, int Msg, IntPtr wParam, IntPtr lParam);
+
+            [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+            [return: MarshalAs(UnmanagedType.Bool)]
+            public static extern bool UpdateLayeredWindow(IntPtr hwnd, IntPtr hdcDst,
+                ref Point pptDst, ref Size psize, IntPtr hdcSrc, ref Point pprSrc,
+                Int32 crKey, ref BLENDFUNCTION pblend, Int32 dwFlags);
+
+            [DllImport("gdi32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+            public static extern IntPtr CreateCompatibleDC(IntPtr hDC);
+
+            [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+            public static extern IntPtr GetDC(IntPtr hWnd);
+
+            [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+            public static extern int ReleaseDC(IntPtr hWnd, IntPtr hDC);
+
+            [DllImport("gdi32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+            [return: MarshalAs(UnmanagedType.Bool)]
+            public static extern bool DeleteDC(IntPtr hdc);
+
+            [DllImport("gdi32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+            public static extern IntPtr SelectObject(IntPtr hDC, IntPtr hObject);
+
+            [DllImport("gdi32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+            [return: MarshalAs(UnmanagedType.Bool)]
+            public static extern bool DeleteObject(IntPtr hObject);
             //[DllImport("user32.dll", SetLastError = true)]
             //public static extern bool MoveWindow(IntPtr hWnd, int X, int Y, int nWidth, int nHeight, bool bRepaint);
 

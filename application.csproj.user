@@ -7,8 +7,14 @@
     <Compile Update="CustomButton.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="Details.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Listen2MeMediaController.cs">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="TransparentLabel.cs">
+      <SubType>Component</SubType>
     </Compile>
   </ItemGroup>
 </Project>

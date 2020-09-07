@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 
-namespace application
+namespace listen2me
 {
     class Win32Window : IWin32Window
     {

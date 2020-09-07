@@ -9,7 +9,7 @@ using Windows.Media;
 using Windows.Media.Control;
 using Windows.Storage.Streams;
 
-namespace application
+namespace listen2me
 {
     using MediaControlSessionManager = GlobalSystemMediaTransportControlsSessionManager;
     using MediaControlSession = GlobalSystemMediaTransportControlsSession;

@@ -1,19 +1,20 @@
-﻿using FontAwesome.Sharp;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Windows.Controls.Primitives;
 using System.Windows.Forms;
 using Windows.Media.Control;
 
-namespace application
+namespace listen2me
 {
     partial class Listen2MeMediaController : Form
     {
         public Listen2MeMediaController() : base()
         {
             __taskbar.SetAsParentOf(this);
+            details.Location = new Point(0, 0);//this.PointToScreen(this.Location);
+            details.ShowInTaskbar = false;
+            InitializeComponent();
         }
 
         protected override void OnResize(EventArgs e)
@@ -40,12 +41,7 @@ namespace application
             base.OnPaint(e);
         }
 
-        public void Initialize()
-        {
-            InitializeComponent();
-        }
-
-        public void InitializeComponent()
+        private void InitializeComponent()
         {
             //this.playbackProgressBar = new ProgressBar();
             this.prevButton = new CustomButton();
@@ -118,6 +114,8 @@ namespace application
             ((ISupportInitialize)(this.multimediaCover)).EndInit();
             this.ResumeLayout(false);
 
+            this.multimediaCover.MouseHover += ShowDetails;
+            this.multimediaCover.MouseLeave += HideDetails;
             this.playPauseButton.LeftClick += OnPlayPouse;
             this.prevButton.LeftClick += OnPrev;
             this.nextButton.LeftClick += OnNext;
@@ -184,6 +182,7 @@ namespace application
 
         private void UpdateMediaInfo(MediaController.MediaInfo newInfo)
         {
+            this.details.SetMediaInfo(newInfo);
             Image img = newInfo.Thumbnail;
             if (img == null)
                 return;
@@ -279,6 +278,22 @@ namespace application
                 Win32ApiHelper.VolumeDown(Handle);
         }
 
+        private void ShowDetails(object obj, EventArgs args)
+        {
+            Point possibleLocation = this.PointToScreen(new Point((this.Width - details.Width) / 2, -details.Height - 5));
+
+            int posX = Math.Min(possibleLocation.X, Screen.FromPoint(possibleLocation).Bounds.Width - details.Width - 10);
+            possibleLocation.X = posX;
+
+            details.Show();
+            details.Location = possibleLocation;
+        }
+
+        private void HideDetails(object obj, EventArgs args)
+        {
+            details.Hide();
+        }
+
         //private void ShowMusicTooltip(object obj, EventArgs args)
         //{
         //    Form toolTipForm = new Form();
@@ -339,5 +354,6 @@ namespace application
         private bool IsAnimating = false;
         private int iconSize = 12;
         private string songInfo = "";
+        private Details details = new Details();
     }
 }

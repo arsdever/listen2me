@@ -5,6 +5,9 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <AssemblyName>listen2me</AssemblyName>
+    <RootNamespace>listen2me</RootNamespace>
+    <StartupObject></StartupObject>
   </PropertyGroup>
 
   <ItemGroup>

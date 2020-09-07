@@ -4,7 +4,7 @@ using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace application
+namespace listen2me
 {
     [StructLayout(LayoutKind.Sequential)]
     public struct Win32Point

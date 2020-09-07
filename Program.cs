@@ -10,25 +10,22 @@ using System.Drawing;
 using System.Security.Permissions;
 using System.Reflection;
 
-namespace application
+namespace listen2me
 {
     static class Listen2MeApplication
     {
-        static Listen2MeMediaController widget = null;
-
         /// <summary>
-        ///  The main entry point for the application.
+        ///  The main entry point for the listen2me.
         /// </summary>
         [STAThread]
         static void Main()
         {
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
 
-            //widget.SizeChanged += new EventHandler(ResizeEventHandler);
-            //ResizeEventHandler(new Object(), new EventArgs());
-            widget = new Listen2MeMediaController();
-            //widget.SetupColors();
+            Listen2MeMediaController widget = new Listen2MeMediaController();
             widget.Show();
-            widget.Initialize();
+
             Application.Run(widget);
         }
     }

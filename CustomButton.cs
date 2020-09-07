@@ -7,7 +7,7 @@ using System.Drawing.Imaging;
 using System.Text;
 using System.Windows.Forms;
 
-namespace application
+namespace listen2me
 {
     class CustomButton : UserControl
     {
